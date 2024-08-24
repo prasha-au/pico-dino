@@ -22,10 +22,5 @@ circup install -r device-requirements.txt
 
 You can use [Piskel](https://www.piskelapp.com/) and import the BMP files to edit them.
 
-Piskel can export to PNG and you can use the command below (on OSX) to convert it to BMP.
-
-```bash
-sips -s format jpeg test.png --out test.jpg
-```
-
+For simplicity, they are saved as 256 color Bitmap in MS Paint. This results in green (usually) being index 250 in the palette and we make this transparent by fixed index in the code.
 

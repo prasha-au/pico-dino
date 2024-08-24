@@ -4,6 +4,7 @@ import rgbmatrix
 import framebufferio
 import keypad
 import asyncio
+import random
 
 import render
 import collision
@@ -33,22 +34,35 @@ def check_if_button_pressed():
     return event and event.released
 
 
+def insert_obstacle():
+    inactive_obstacles = list(filter(lambda t: t.hidden == True, render.obstacle_assets))
+    if len(inactive_obstacles) == 0:
+        return False
+
+    idx = random.randint(0, len(inactive_obstacles) - 1)
+    render.insert_obstacle(inactive_obstacles[idx])
+    return True
+
+
+
+
 async def run_single_round():
     score = 0
+    add_asset_countdown = 0
 
-    add_asset_counter = 30
     while True:
         score += 1
-        add_asset_counter += 1
-        if add_asset_counter > 30 and render.insert_obstacle():
-            add_asset_counter = 0
-
-        if check_if_button_pressed():
-            render.set_dino_jumping()
 
         for tile in render.obstacle_assets:
             if tile.hidden == False and collision.detect_collision(render.dino_asset, tile):
                 return
+
+        add_asset_countdown -= 1
+        if add_asset_countdown <= 0 and insert_obstacle():
+            add_asset_countdown = random.randint(32, 64)
+
+        if check_if_button_pressed():
+            render.set_dino_jumping()
 
         render.progress_obstacles()
         render.progress_dino()

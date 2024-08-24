@@ -26,7 +26,7 @@ def init_display_assets():
 
     def init_generic_obstacle(filename: str, y: int):
         b, p = adafruit_imageload.load(filename)
-        p.make_transparent(0)
+        p.make_transparent(250)
         tile = displayio.TileGrid(b, pixel_shader=p)
         tile.x = 60
         tile.y = y
@@ -51,7 +51,7 @@ def init_display_assets():
 
 
     b, p = adafruit_imageload.load('restart.bmp')
-    p.make_transparent(0)
+    p.make_transparent(250)
     restart_asset = displayio.TileGrid(b, pixel_shader=p)
     restart_asset.x = 24
     restart_asset.y = 8
@@ -71,19 +71,9 @@ def progress_obstacles():
             tile.hidden = True
 
 
-def insert_obstacle():
-    global obstacle_assets
-    inactive_tiles = list(filter(lambda t: t.hidden == True, obstacle_assets))
-
-    if len(inactive_tiles) == 0:
-        return False
-
-    idx = random.randint(0, len(inactive_tiles) - 1)
-    tile = inactive_tiles[idx]
-    tile.x = 80
-    tile.hidden = False
-
-    return True
+def insert_obstacle(obstacle_asset):
+    obstacle_asset.x = 64
+    obstacle_asset.hidden = False
 
 
 def update_score_label(score: int):

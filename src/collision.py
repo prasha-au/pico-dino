@@ -18,7 +18,7 @@ def detect_collision(dino, obstacle):
   dino_sprite_offset_x = dino[0] * dino.tile_width
   for x in range(check_area[0], check_area[2]):
     for y in range(check_area[1], check_area[3]):
-      if dino_bitmap[x - dino.x + dino_sprite_offset_x, y - dino.y] != 250 and obstacle_bitmap[x - obstacle.x, y - obstacle.y] != 0:
+      if dino_bitmap[x - dino.x + dino_sprite_offset_x, y - dino.y] != 250 and obstacle_bitmap[x - obstacle.x, y - obstacle.y] != 250:
         return True
 
 

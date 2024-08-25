@@ -2,6 +2,10 @@
 
 A [Chrome offline dinosaur](chrome://dino/) game implemented on a Pi Pico with a P5 display and push button.
 
+## Preview
+
+https://github.com/user-attachments/assets/342aef60-0438-4e55-83aa-c784a220cda8
+
 
 ## Initial setup
 
